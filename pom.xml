@@ -10,7 +10,7 @@
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>4.2.3-SNAPSHOT</springside.version>
+		<springside.version>4.3.0-SNAPSHOT</springside.version>
 		<spring.version>4.0.2.RELEASE</spring.version>
 		<hibernate.version>4.3.1.Final</hibernate.version>
 		<spring-data-jpa.version>1.4.4.RELEASE</spring-data-jpa.version>
@@ -30,7 +30,7 @@
 		<selenium.version>2.40.0</selenium.version>
 		<jetty.version>7.6.14.v20131031</jetty.version>
 		<h2.version>1.3.175</h2.version>
-		<mysql.version>1.3.175</mysql.version>
+		<mysql.version>5.1.2</mysql.version>
 		<mybatis.version>3.2.7</mybatis.version>
 		<mybatis-spring.version>1.2.2</mybatis-spring.version>
 
@@ -40,11 +40,11 @@
 
 		<!-- 项目属性 -->
 
-		<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
-		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
-		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
-		<!-- <jdbc.driver.groupId>mysql</jdbc.driver.groupId> <jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId> 
-			<jdbc.driver.version>${mysql.version}</jdbc.driver.version> -->
+		<!-- <jdbc.driver.groupId>com.h2database</jdbc.driver.groupId> <jdbc.driver.artifactId>h2</jdbc.driver.artifactId> 
+			<jdbc.driver.version>${h2.version}</jdbc.driver.version> -->
+		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+		<jdbc.driver.version>${mysql.version}</jdbc.driver.version>
 	</properties>
 
 	<prerequisites>
@@ -166,7 +166,34 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate-validator.version}</version>
 		</dependency>
+		<!-- SOAP begin -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>3.0.1</version>
 
+		</dependency>
+		<!-- SOAP end -->
+
+		<!-- JAX-RS begin -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<version>3.0.1</version>
+
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+			<version>2.4.0</version>
+
+		</dependency>
+		<!-- JAX-RS end -->
 		<!-- JSON begin -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -400,25 +427,11 @@
 			</plugin>
 
 			<!-- 增加functional test的Source目录 -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<execution>
-						<id>add-functional-source</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-test-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>src/test/functional</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>build-helper-maven-plugin</artifactId> 
+				<version>1.8</version> <executions> <execution> <id>add-functional-source</id> 
+				<phase>generate-sources</phase> <goals> <goal>add-test-source</goal> </goals> 
+				<configuration> <sources> <source>src/test/functional</source> </sources> 
+				</configuration> </execution> </executions> </plugin> -->
 
 			<!-- cobertura插件, 设置不需要计算覆盖率的类 -->
 			<plugin>
