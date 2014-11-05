@@ -15,12 +15,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
 import com.aozhi.songify.data.UserData;
 import com.aozhi.songify.entity.User;
-import com.aozhi.songify.repository.TaskDao;
-import com.aozhi.songify.repository.UserDao;
+import com.aozhi.songify.repository.jpa.TaskDao;
+import com.aozhi.songify.repository.jpa.UserDao;
 import com.aozhi.songify.service.ServiceException;
 import com.aozhi.songify.service.account.ShiroDbRealm.ShiroUser;
+
 import org.springside.modules.test.security.shiro.ShiroTestUtils;
 import org.springside.modules.utils.Clock.MockClock;
 

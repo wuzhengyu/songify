@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package com.aozhi.songify.repository;
+package com.aozhi.songify.repository.jpa;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -13,7 +13,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.test.context.ContextConfiguration;
+
 import com.aozhi.songify.entity.Task;
+import com.aozhi.songify.repository.jpa.TaskDao;
+
 import org.springside.modules.test.spring.SpringTransactionalTestCase;
 
 @ContextConfiguration(locations = { "/applicationContext.xml" })

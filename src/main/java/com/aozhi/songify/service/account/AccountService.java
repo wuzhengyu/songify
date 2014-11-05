@@ -14,11 +14,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.aozhi.songify.entity.User;
-import com.aozhi.songify.repository.TaskDao;
-import com.aozhi.songify.repository.UserDao;
+import com.aozhi.songify.repository.jpa.TaskDao;
+import com.aozhi.songify.repository.jpa.UserDao;
 import com.aozhi.songify.service.ServiceException;
 import com.aozhi.songify.service.account.ShiroDbRealm.ShiroUser;
+
 import org.springside.modules.security.utils.Digests;
 import org.springside.modules.utils.Clock;
 import org.springside.modules.utils.Encodes;

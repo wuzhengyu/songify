@@ -16,8 +16,10 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.aozhi.songify.entity.Task;
-import com.aozhi.songify.repository.TaskDao;
+import com.aozhi.songify.repository.jpa.TaskDao;
+
 import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
 import org.springside.modules.persistence.SearchFilter.Operator;
