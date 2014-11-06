@@ -50,7 +50,10 @@ public class AccountSoapServiceImpl implements AccountSoapService {
 	@Autowired
 	private Validator validator;
 
-	
+	  public String sayHi(String text) {
+	        System.out.println("sayHi called");
+	        return "Hello " + text;
+	    }
 
 	/**
 	 * @see AccountSoapService#getUser(Long)

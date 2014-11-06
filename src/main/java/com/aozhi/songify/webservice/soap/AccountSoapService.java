@@ -25,7 +25,7 @@ import com.aozhi.songify.webservice.soap.response.dto.UserDTO;
 // name 指明wsdl中<wsdl:portType>元素的名称
 @WebService(name = "AccountService", targetNamespace = WsConstants.NS)
 public interface AccountSoapService {
-
+	String sayHi(String text);
 	/**
 	 * 获取用户信息.
 	 */

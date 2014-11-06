@@ -2,17 +2,21 @@
 <configuration>
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
 		</encoder>
 	</appender>
 
-	<appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="rollingFile"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>/tmp/logs/songify.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>/tmp/logs/songify.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>/tmp/logs/songify.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
 		</rollingPolicy>
 		<encoder>
-			<pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
 		</encoder>
 	</appender>
 
@@ -20,8 +24,12 @@
 	<logger name="com.aozhi.songify" level="INFO" />
 
 	<!--log4jdbc -->
-	<logger name="jdbc.sqltiming" level="INFO"/>
+	<logger name="jdbc.sqltiming" level="INFO" />
+	<!-- cxf inbound/outbound logger -->
+	<logger name="org.apache.cxf.services" level="INFO" />
 
+	<!-- springside modules -->
+	<logger name="org.springside.modules" level="INFO" />
 	<root level="WARN">
 		<appender-ref ref="console" />
 		<appender-ref ref="rollingFile" />

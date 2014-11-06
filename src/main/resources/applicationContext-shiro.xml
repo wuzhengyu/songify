@@ -27,9 +27,10 @@
 				/logout = logout
 				/static/** = anon
 				/api/** = anon
+				/cxf/** = anon
 				/register/** = anon
 				/admin/** = roles[admin]
-				/** = user
+				
 			</value>
 		</property>
 	</bean>
