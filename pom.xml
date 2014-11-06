@@ -119,6 +119,11 @@
 			<version>${jdbc.driver.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+		</dependency>
 		<!-- PERSISTENCE end -->
 
 		<!-- WEB begin -->
