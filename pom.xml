@@ -10,7 +10,7 @@
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>4.3.0-SNAPSHOT</springside.version>
+		<springside.version>4.2.3-SNAPSHOT</springside.version>
 		<spring.version>4.0.2.RELEASE</spring.version>
 		<hibernate.version>4.3.1.Final</hibernate.version>
 		<spring-data-jpa.version>1.4.4.RELEASE</spring-data-jpa.version>
@@ -52,9 +52,18 @@
 		<maven>3.0.0</maven>
 	</prerequisites>
 
-	<!-- 设定插件仓库, 如有Nexus私服, 取消注释并指向正确的服务器地址. <pluginRepositories> <pluginRepository> 
-		<id>nexus</id> <name>Team Nexus Repository</name> <url>http://localhost:8081/nexus/content/groups/public</url> 
-		<snapshots> <enabled>false</enabled> </snapshots> </pluginRepository> </pluginRepositories> -->
+	<!-- 设定插件仓库, 如有Nexus私服, 取消注释并指向正确的服务器地址. 
+	<pluginRepositories> 
+		<pluginRepository> 
+			<id>nexus</id>
+			<name>Team Nexus Repository</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url> 
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	-->
 
 	<!-- 依赖项定义 -->
 	<dependencies>
@@ -119,11 +128,6 @@
 			<version>${jdbc.driver.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>${h2.version}</version>
-		</dependency>
 		<!-- PERSISTENCE end -->
 
 		<!-- WEB begin -->
@@ -183,11 +187,7 @@
 			<artifactId>cxf-rt-transports-http</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http-jetty</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
+		
 		<!-- SOAP end -->
 
 		<!-- JAX-RS begin -->
@@ -356,12 +356,14 @@
 			</exclusions>
 		</dependency>
 
-		<!-- h2 如果生产数据库不是H2，解开下面的注释 -->
+		<!-- h2  如果生产数据库不是H2，解开下面的注释
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>${h2.version}</version>
 		</dependency>
+		-->
+
 		<!-- jetty -->
 		<dependency>
 			<groupId>org.eclipse.jetty.aggregate</groupId>
@@ -416,19 +418,9 @@
 				<version>2.4</version>
 				<configuration>
 					<warName>${project.artifactId}</warName>
-					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.1</version>
-				<configuration>
-					<server>myTomcat</server>
-					<url>http://localhost:8080/manager/text</url>
-					<path>/${project.build.finalName}</path>
-				</configuration>
-			</plugin>
+
 			<!-- test插件, 仅测试名称为*Test的类,使用支持分组测试的surefire-junit47 driver -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -450,11 +442,25 @@
 			</plugin>
 
 			<!-- 增加functional test的Source目录 -->
-			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>build-helper-maven-plugin</artifactId> 
-				<version>1.8</version> <executions> <execution> <id>add-functional-source</id> 
-				<phase>generate-sources</phase> <goals> <goal>add-test-source</goal> </goals> 
-				<configuration> <sources> <source>src/test/functional</source> </sources> 
-				</configuration> </execution> </executions> </plugin> -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>add-functional-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/test/functional</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
 			<!-- cobertura插件, 设置不需要计算覆盖率的类 -->
 			<plugin>
@@ -471,7 +477,7 @@
 				</configuration>
 			</plugin>
 
-			<!-- enforcer插件, 避免被依赖的依赖引入过期的jar�? -->
+			<!-- enforcer插件, 避免被依赖的依赖引入过期的jar?? -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
@@ -603,12 +609,9 @@
 						<artifactId>maven-antrun-plugin</artifactId>
 						<configuration>
 							<target>
-								<property
-									file="src/main/resources/application.development.properties" />
+								<property file="src/main/resources/application.development.properties" />
 								<property file="src/main/resources/application.properties" />
-								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
-									password="${jdbc.password}" onerror="continue"
-									encoding="${project.build.sourceEncoding}">
+								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" onerror="continue" encoding="${project.build.sourceEncoding}">
 									<classpath refid="maven.test.classpath" />
 									<transaction src="src/main/resources/sql/h2/schema.sql" />
 									<transaction src="src/test/resources/data/h2/import-data.sql" />
